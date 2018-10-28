@@ -13,17 +13,23 @@ include('functions.php');
 <body>
 	<div class="container">
 		<div class="row">
-			<form action="index.php" method="get">
-				<input type="text" name="cprice" required="true">
-				<input class="btn btn-secondary" type="submit" value="Calculate">
-			</form>
+			<div class="col-3">
+				<form action="index.php" method="get">
+					<label>Enter price</label>
+					<input type="text" class="form-control" name="cprice" required="true"><br>
+					<input class="btn btn-light" type="submit" value="Calculate">
+				</form>
+			</div>
+			<div class="col">
+				<table class="table table-dark">
+					<tr><th>Cost price</th><th>Shipping</th><th>Margin</th><th>VAT</th><th>Retail</th></tr>
+					<?php
+					if ($cp=$_GET['cprice']) { 
+						echo "<tr><td>" . $cp . " €". "</td><td>" . getSH($cp) . " €". "</td><td>" . getMG($cp) . " €". "</td><td>" .  " €". getVAT($cp) . " €"."</td><td>" . getRetail($cp) . " €". "</td></tr>";
+					} ?>
+				</table>
+			</div>
 		</div>
-			<table class="table table-sm">
-			<tr><th>Cost price</th><th>Shipping</th><th>Margin</th><th>VAT</th><th>Retail</th></tr>
-			<?php
-			if ($cp=$_GET['cprice']) { 
-				echo "<tr><td>" . $cp . "</td><td>" . getSH($cp) . "</td><td>" . getMG($cp) . "</td><td>" . getVAT($cp) . "</td><td>" . getRetail($cp) . "</td></tr>";
-			} ?>
-		</table>
-	</body>
-	</html>
+	</div>
+</body>
+</html>
